@@ -1,0 +1,27 @@
+---
+# tasks file for user
+- name: add user in system # Добавляет пользователя в систему, по умолчанию  имя пользователя, пароль, ssh ключ определены в файле user/defaults/main.yaml
+  ansible.builtin.user:
+    name: "{{add_user}}"
+    password: "{{user_pass}}"
+    groups: "{{gr}}"
+    append: yes
+    create_home: yes
+    shell: /bin/bash
+
+- name: add directory # создает директорию для ssh ключа
+  ansible.builtin.file:
+    path: "/home/{{add_user}}/.ssh"
+    state: directory
+    owner: "{{add_user}}"
+    group: "{{add_user}}"
+    mode: '0700'
+
+- name: add file authorized_keys # добаляет ssh ключь для авторизации
+  ansible.builtin.copy:
+    content: "{{ssh_key}}"
+    dest: "/home/{{add_user}}/.ssh/authorized_keys"
+    owner: "{{add_user}}"
+    group: "{{add_user}}"
+    mode: '0600'
+

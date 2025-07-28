@@ -1,0 +1,6 @@
+---
+# defaults file for user
+user_pass:  $6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1 # ansible не позволяет хранить пароль в файле в открытом виде, вместо пароля хранится его хэш, наиболее простой способо получить хэш  - выполнить команду вида ansible all -i localhost, -m debug -a "msg={{ 'mypassword' | password_hash('sha512', 'mysecretsalt') }}" где mypassword - ваш пароль password_hash('sha512' - способ шифрования, mysecretsalt - соль изпользуемая для генирации пароля. В данн случае хэш соответсвует паролю mypassword
+add_user: Bob
+gr: sudo
+ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOVVCyiBzWg3H7dsTAP4UT4OHvj+lwxj5y1KUhBjSVCA anton@anton-H310M-H
