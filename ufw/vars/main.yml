@@ -1,0 +1,3 @@
+---
+port_ssh: 2324
+# vars file for ufw
